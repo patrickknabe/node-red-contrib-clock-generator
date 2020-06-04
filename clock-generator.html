@@ -1,0 +1,61 @@
+<script type="text/javascript">
+
+	RED.nodes.registerType( 'clock-generator', {
+		category: 'function',
+		defaults: {
+			name: { value: '' },
+			topic: { value: '' },
+			controlled: { value: false },
+			frequency: { value: 1, required: true, validate: RED.validators.regex( /^[0-9]+$/ ) },
+			output: { value: 1 }
+		},
+		inputs: 0,
+		outputs: 1,
+		color: '#a6bbcf',
+		icon: 'serial.png',
+		paletteLabel: 'clock generator',
+		label: function() {
+			return this.name || 'clock generator';
+		},
+		oneditprepare: function() {
+			const config = this;
+
+			$( '#node-input-controlled' ).on( 'change', function() {
+				config.inputs = $( '#node-input-controlled' ).prop( 'checked' ) ? 1 : 0;
+			} );
+		}
+	} );
+
+</script>
+
+<script type="text/html" data-template-name="clock-generator">
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-fw fa-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-fw fa-tasks"></i> Topic</label>
+		<input type="text" id="node-input-topic" placeholder="Topic" />
+	</div>
+	<br />
+	<div class="form-row">
+		<label for="node-input-controlled"><i class="fa fa-fw fa-arrow-right"></i> Controlled</label>
+		<input type="checkbox" id="node-input-controlled" style="height: 15px; vertical-align: baseline; width: 15px;" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-frequency"><i class="fa fa-fw fa-repeat"></i> Frequency</label>
+		<input type="text" id="node-input-frequency" style="text-align: center; width: 50px;" />
+		<span>Hz</span>
+	</div>
+	<div class="form-row">
+		<label for="node-input-output"><i class="fa fa-fw fa-envelope"></i> Output</label>
+		<select id="node-input-output" style="width: 70%;">
+			<option value={{1}}>Boolean</option>
+			<option value={{2}}>Numeric</option>
+		</select>
+	</div>
+</script>
+
+<script type="text/html" data-help-name="clock-generator">
+	<p>A clock generator that works with the specified frequency.</p>
+</script>
