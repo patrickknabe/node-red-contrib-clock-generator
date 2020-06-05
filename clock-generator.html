@@ -6,12 +6,12 @@
 			name: { value: '' },
 			topic: { value: '' },
 			controlled: { value: false },
-			frequency: { value: 1, required: true, validate: RED.validators.regex( /^[0-9]+$/ ) },
-			output: { value: 1 }
+			period: { value: '1', validate: RED.validators.regex( /^[0-9]+$/ ) },
+			output: { value: '1' }
 		},
 		inputs: 0,
 		outputs: 1,
-		color: '#a6bbcf',
+		color: '#ddab0e',
 		icon: 'serial.png',
 		paletteLabel: 'clock generator',
 		label: function() {
@@ -43,19 +43,19 @@
 		<input type="checkbox" id="node-input-controlled" style="height: 15px; vertical-align: baseline; width: 15px;" />
 	</div>
 	<div class="form-row">
-		<label for="node-input-frequency"><i class="fa fa-fw fa-repeat"></i> Frequency</label>
-		<input type="text" id="node-input-frequency" style="text-align: center; width: 50px;" />
-		<span>Hz</span>
+		<label for="node-input-period"><i class="fa fa-fw fa-repeat"></i> Period</label>
+		<input type="text" id="node-input-period" style="text-align: center; width: 50px;" />
+		<span>seconds</span>
 	</div>
 	<div class="form-row">
 		<label for="node-input-output"><i class="fa fa-fw fa-envelope"></i> Output</label>
-		<select id="node-input-output" style="width: 70%;">
-			<option value={{1}}>Boolean</option>
-			<option value={{2}}>Numeric</option>
+		<select id="node-input-output">
+			<option value="1">true / false</option>
+			<option value="2">1 / 0</option>
 		</select>
 	</div>
 </script>
 
 <script type="text/html" data-help-name="clock-generator">
-	<p>A clock generator that works with the specified frequency.</p>
+	<p>A clock generator that works with the specified period.</p>
 </script>
