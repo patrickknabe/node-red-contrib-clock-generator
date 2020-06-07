@@ -6,27 +6,22 @@ module.exports = function( RED ) {
 
 		let timeout;
 		let timestamp = 0;
-		let status;
 
 		function start() {
 			if( timestamp === 0 ) {
 				timestamp = new Date().getTime();
-				status = true;
-
-				update();
+				update( true );
 			}
 		}
 
 		function stop() {
 			if( timestamp !== 0 ) {
 				timestamp = 0;
-				status = false;
-
-				update();
+				update( false );
 			}
 		}
 
-		function update() {
+		function update( status ) {
 			msg = {
 				name: config.name,
 				topic: config.topic,
@@ -50,8 +45,7 @@ module.exports = function( RED ) {
 			if( timestamp !== 0 ) {
 				timestamp += config.period * 500;
 				timeout = setTimeout( () => {
-					status = !status;
-					update();
+					update( !status );
 				}, timestamp - msg.timestamp );
 
 				node.status( { fill: 'green', shape: 'dot', text: 'active: ' + msg.payload } );
