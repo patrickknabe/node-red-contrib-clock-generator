@@ -2,8 +2,8 @@ module.exports = function( RED ) {
 
 	function ClockGenerator( config ) {
 		RED.nodes.createNode( this, config );
-
 		const node = this;
+
 		let timeout;
 		let timestamp = 0;
 		let status;
@@ -33,13 +33,13 @@ module.exports = function( RED ) {
 				timestamp: new Date().getTime()
 			};
 
-			switch( parseInt( config.output ) ) {
+			switch( config.output ) {
 
-				case 1:
+				case '1':
 					msg.payload = !status ? false : true;
 					break;
 
-				case 2:
+				case '2':
 					msg.payload = !status ? 0 : 1;
 					break;
 
@@ -48,32 +48,28 @@ module.exports = function( RED ) {
 			node.send( msg );
 
 			if( timestamp !== 0 ) {
-				node.status( { fill: 'green', shape: 'dot', text: 'active: ' + msg.payload } );
-
 				timestamp += config.period * 500;
 				timeout = setTimeout( () => {
 					status = !status;
 					update();
 				}, timestamp - msg.timestamp );
+
+				node.status( { fill: 'green', shape: 'dot', text: 'active: ' + msg.payload } );
 			} else {
 				clearTimeout( timeout );
 				node.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
 			}
 		}
 
-		if( !config.controlled ) {
-			start();
-		} else {
-			node.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
+		node.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
 
-			node.on( 'input', ( msg ) => {
-				if( msg.payload ) {
-					start();
-				} else {
-					stop();
-				}
-			} );
-		}
+		node.on( 'input', msg => {
+			if( msg.payload ) {
+				start();
+			} else {
+				stop();
+			}
+		} );
 
 		node.on( 'close', stop );
 	}
