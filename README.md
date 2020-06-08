@@ -1,6 +1,6 @@
 # node-red-contrib-clock-generator
 
-A controlled clock generator for Node-RED that runs through the individual clock cycles with the set period duration.
+A controllable clock generator for Node-RED that runs through the individual clock cycles with the set period duration.
 
 Features:
 
@@ -10,7 +10,7 @@ Features:
 
 ## Installation
 
-Open Node-RED and select `Manage palette` from main menu to open the Palette Manager. Go to the `Install` tab, search for `node-red-contrib-clock-generator` and click `install`.
+Open Node-RED and select `Manage palette` from the menu to open the Palette Manager. Go to the `Install` tab, search for `node-red-contrib-clock-generator` and click `install`.
 
 Alternatively, you can run the following command in your Node-RED user directory (typically `~/.node-red`):
 

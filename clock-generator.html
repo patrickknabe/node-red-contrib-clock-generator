@@ -46,7 +46,7 @@
 
 <script type="text/html" data-help-name="clock-generator">
 	<p>
-		A controlled clock generator that runs through the individual clock cycles with the set period duration.
+		A controllable clock generator that runs through the individual clock cycles with the set period duration.
 	</p>
 	<p>
 		The clock generator starts when receiving <code>1</code> or <code>true</code> as value of <code>msg.payload</code>.
@@ -62,5 +62,8 @@
 	<p>
 		The <b>Output</b> parameter specifies the data type of <code>msg.payload</code> in an outgoing message.
 		You can choose between <code>0</code> / <code>false</code> and <code>1</code> / <code>true</code>.
+	</p>
+	<p>
+		The outgoing message also contains <code>msg.timestamp</code>, which specifies the time of the status change in milliseconds since 1.1.1970.
 	</p>
 </script>
