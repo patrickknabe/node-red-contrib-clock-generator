@@ -7,8 +7,10 @@
 		"url": "git+https://github.com/patrickknabe/node-red-contrib-clock-generator.git"
 	},
 	"keywords": [
+		"clock",
 		"clock generator",
-		"node-red"
+		"node-red",
+		"timer"
 	],
 	"author": "Patrick Knabe",
 	"license": "MIT",
