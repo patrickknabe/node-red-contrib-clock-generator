@@ -7,6 +7,7 @@ Features:
 - Controllable by incoming messages
 - Period duration adjustable
 - Format of outgoing messages configurable
+- Second output with inverted signal
 
 ## Installation
 
