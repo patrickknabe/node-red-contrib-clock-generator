@@ -10,7 +10,8 @@
 		"clock",
 		"clock generator",
 		"node-red",
-		"timer"
+		"timer",
+		"toggle"
 	],
 	"author": "Patrick Knabe",
 	"license": "MIT",
