@@ -1,5 +1,5 @@
 module.exports = RED => {
-	RED.nodes.registerType( 'clock-generator', function ClockGenerator( config ) {
+	RED.nodes.registerType( 'clock-generator', function( config ) {
 		RED.nodes.createNode( this, config );
 
 		let timeout;
