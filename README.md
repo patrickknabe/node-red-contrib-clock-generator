@@ -8,6 +8,7 @@ Features:
 - Period duration adjustable
 - Format of outgoing messages configurable
 - Second output with inverted signal
+- Initial output messages (optional)
 
 ## Installation
 
