@@ -3,9 +3,20 @@ module.exports = RED => {
 		RED.nodes.createNode( this, config );
 
 		let timeout;
-		let timestamp = 0;
+		let timestamp;
 
-		const getPayload = status => config.output === '1' ? !status ? false : true : !status ? 0 : 1;
+		const getPayload = value => config.output == 1 ? !value ? false : true : !value ? 0 : 1;
+
+		const setStatus = ( value, flash ) => {
+			if( timestamp === 0 ) {
+				this.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
+			} else if( flash ) {
+				this.status( { fill: 'green', shape: 'dot', text: `active: ${ getPayload( value ) } / ${ getPayload( !value ) }` } );
+				setTimeout( setStatus, 250, value, false );
+			} else {
+				this.status( { fill: 'grey', shape: 'dot', text: `active: ${ getPayload( value ) } / ${ getPayload( !value ) }` } );
+			}
+		};
 
 		const start = () => {
 			if( timestamp === 0 ) {
@@ -21,28 +32,27 @@ module.exports = RED => {
 			}
 		};
 
-		const update = status => {
+		const update = value => {
 			msg = {
-				name:		config.name,
-				topic:		config.topic,
-				timestamp:	new Date().getTime(),
-				payload:	getPayload( status )
+				name: config.name,
+				topic: config.topic,
+				payload: getPayload( value ),
+				timestamp: new Date().getTime()
 			};
 
-			this.send( [ msg, { ...msg, payload: getPayload( !status ) } ] );
+			setStatus( value, true );
+			this.send( [ msg, { ...msg, payload: getPayload( !value ) } ] );
 
 			if( timestamp !== 0 ) {
 				while( timestamp <= msg.timestamp ) timestamp += config.period * 500;
-				timeout = setTimeout( update, timestamp - msg.timestamp, !status );
-
-				this.status( { fill: 'green', shape: 'dot', text: `active: ${ msg.payload } / ${ getPayload( !status ) }` } );
+				timeout = setTimeout( update, timestamp - msg.timestamp, !value );
 			} else {
 				clearTimeout( timeout );
-				this.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
 			}
 		};
 
-		this.status( { fill: 'grey', shape: 'dot', text: 'inactive' } );
+		timestamp = !config.init ? 0 : 1;
+		!config.init ? setStatus() : this.emit( 'input', { payload: false } );
 
 		this.on( 'input', msg => msg.payload ? start() : stop() );
 		this.on( 'close', stop );

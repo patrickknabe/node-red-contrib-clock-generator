@@ -2,8 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+- Option for sending init-messages after deploy
+
 ### Changed
 - Node icon is now SVG
+- Status indicator below node now flashes in cycles
 
 ## [v1.1.0] - 2020-09-22
 
