@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [v1.2.0] - 2020-09-24
 
 ### Added
 - Option for sending init-messages after deploy
@@ -20,6 +20,6 @@
 - Functional clock generator for Node-RED
 - Readme, Changelog and License
 
-[Unreleased]: https://github.com/patrickknabe/node-red-contrib-clock-generator/compare/v1.1.0...HEAD
+[v1.2.0]: https://github.com/patrickknabe/node-red-contrib-clock-generator/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/patrickknabe/node-red-contrib-clock-generator/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/patrickknabe/node-red-contrib-clock-generator/releases/tag/v1.0.0
